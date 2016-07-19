@@ -1,0 +1,39 @@
+<h1>Add a question to your survey, <%=@survey.name%></h1>
+
+<% if @survey %>
+  <ul>
+  <% @questions.each do |question|%>
+      <li>
+        <h3>Q: <%=question.name()%></h3>
+        <h3>A: <%=question.answer()%></h3>
+        <form action="/questions/<%= question.id() %>" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <button type="submit" name="button">Delete this Question</button>
+        </form>
+        </a>
+      </li>
+  <% end %>
+  </ul>
+
+<% else %>
+  <h3>There are no survey questions yet!</h3>
+<% end %>
+
+<h3>Add a Question</h3>
+<form action="/questions/<%= @survey.id %>" method="post">
+  <label for="question_name">Enter your Question:</label>
+  <input type="text" name="question_name" id="question_name">
+  <label for="question_answer">Enter your Answer:</label>
+  <input type="text" name="question_answer" id="question_answer">
+  <button type="submit" name="button">Create Question</button>
+</form>
+
+<h3>Edit your Survey name</h3>
+<form action="/surveys/<%= @survey.id %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <label for="new_survey_name">New Survey Name:</label>
+  <input type="text" name="new_survey_name" id="new_survey_name">
+  <button type="submit" name="button">Update Survey Name</button>
+</form>
+
+<a href="/">Go Home</a>
