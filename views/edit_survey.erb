@@ -5,11 +5,18 @@
   <% @questions.each do |question|%>
       <li>
         <h3>Q: <%=question.name()%></h3>
-        <h3>A: <%=question.answer()%></h3>
         <form action="/questions/<%= question.id() %>" method="post">
           <input type="hidden" name="_method" value="delete">
           <button type="submit" name="button">Delete this Question</button>
         </form>
+        <h3>Edit your Question</h3>
+        <form action="/questions/<%= question.id %>" method="post">
+          <input type="hidden" name="_method" value="patch">
+          <label for="new_question">New Question Text:</label>
+          <input type="text" name="new_question" id="new_question">
+          <button type="submit" name="button">Update Question</button>
+        </form>
+
         </a>
       </li>
   <% end %>
@@ -23,8 +30,6 @@
 <form action="/questions/<%= @survey.id %>" method="post">
   <label for="question_name">Enter your Question:</label>
   <input type="text" name="question_name" id="question_name">
-  <label for="question_answer">Enter your Answer:</label>
-  <input type="text" name="question_answer" id="question_answer">
   <button type="submit" name="button">Create Question</button>
 </form>
 
@@ -34,6 +39,10 @@
   <label for="new_survey_name">New Survey Name:</label>
   <input type="text" name="new_survey_name" id="new_survey_name">
   <button type="submit" name="button">Update Survey Name</button>
+</form>
+
+<form action="/surveys/<%= @survey.id() %>/take" >
+  <button type="submit" name="button">Take this Survey</button>
 </form>
 
 <a href="/">Go Home</a>

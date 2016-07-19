@@ -1,0 +1,18 @@
+
+<% if @survey && @questions.any?()%>
+  <form action="/surveys/<%= @survey.id %>/results" method="post">
+    <ul>
+      <% @questions.each do |question|%>
+        <li>
+          <h3>Q: <%=question.name()%></h3>
+          <label for="new_answer_<%= question.id %>">Answer:</label>
+          <input type="text" name="new_answer_<%= question.id %>" id="new_answer_<%= question.id %>">
+        </li>
+      <% end %>
+    </ul>
+    <button type="submit" name="button">Submit Answer</button>
+  </form>
+<% else %>
+  <h3>There are no saved questions for this survey!</h3>
+<% end %>
+<a href="/">Go Home</a>

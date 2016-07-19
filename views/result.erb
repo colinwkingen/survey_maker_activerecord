@@ -1,0 +1,12 @@
+
+
+<ul>
+  <% @survey.questions().each() do |question|%>
+    <li>
+      <h3>Q: <%=question.name()%></h3>
+      <h3>A: <%=question.answer()%></h3>
+    </li>
+  <% end %>
+</ul>
+
+<a href="/">Go Home</a>
